@@ -3,7 +3,7 @@ maintainer 'Alexander Pyatkin'
 maintainer_email 'aspyatkin@gmail.com'
 license 'MIT'
 description ''
-version '1.0.0'
+version '1.0.1'
 
 recipe 'better-ssmtp', ''
 depends 'secret', '~> 1.0.0'
