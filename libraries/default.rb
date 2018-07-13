@@ -5,14 +5,14 @@ module ChefCookbook
         @node = node
       end
 
-      def mail_send_command(subject, from, to)
+      def mail_send_command(subject, from, to, suppress_empty_message=false)
         case @node['platform_family']
         when 'rhel', 'fedora', 'amazon'
-          %Q(mail -s "#{subject}" -S from="#{from}" #{to})
+          %Q(mail #{suppress_empty_message ? '-E ': ''}-s "#{subject}" -S from="#{from}" #{to})
         when 'debian'
-          %Q(mail -s "#{subject}" -a "From: #{from}" #{to})
+          %Q(mail #{suppress_empty_message ? '-E "set nonullbody" ' : ''}-s "#{subject}" -a "From: #{from}" #{to})
         else
-          %Q(mail -s "#{subject}" -a "From: #{from}" #{to})
+          %Q(mail #{suppress_empty_message ? '-E "set nonullbody" ' : ''}-s "#{subject}" -a "From: #{from}" #{to})
         end
       end
     end
